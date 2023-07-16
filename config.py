@@ -1,4 +1,5 @@
 import argparse
+import sys
 import torch
 from multiprocessing import cpu_count
 
@@ -33,11 +34,10 @@ class Config:
 
     @staticmethod
     def arg_parse() -> tuple:
+        exe = sys.executable or "python"
         parser = argparse.ArgumentParser()
         parser.add_argument("--port", type=int, default=7865, help="Listen port")
-        parser.add_argument(
-            "--pycmd", type=str, default="python", help="Python command"
-        )
+        parser.add_argument("--pycmd", type=str, default=exe, help="Python command")
         parser.add_argument("--colab", action="store_true", help="Launch in colab")
         parser.add_argument(
             "--noparallel", action="store_true", help="Disable parallel processing"
